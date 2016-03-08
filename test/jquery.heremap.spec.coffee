@@ -1,9 +1,7 @@
-(($) ->
-  module 'jQuery.fn.heremap' 
+assert = require('assert')
 
-  test 'is heremap', ->
-    expect(2)
-    strictEqual($.heremap(), 'heremap', 'should be jquery.heremap')
-    strictEqual($.heremap({punctuation: '!'}), 'jquery.heremap!', 'should be thoroughly jquery.heremap')
-  
-) jQuery
+describe 'jquery.heremap', ->
+  describe 'Validating a Here libs imported', ->
+    it 'should fail if empty', ->
+      assert $.fn
+      assert $.fn.heremap

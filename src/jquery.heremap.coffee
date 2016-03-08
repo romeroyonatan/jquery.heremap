@@ -5,7 +5,6 @@
 
 (($) ->
 
-  options = {}
   platform = null
   maptypes = null
   ###
@@ -50,11 +49,9 @@
     options = $.extend({}, $.fn.heremap.options, options)
     init options
     @.each ->
-      cfg =
+      new H.Map @, maptypes.normal.map,
         zoom: getZoom @
         center: getCenter @
-      console.log cfg.center
-      new H.Map @, maptypes.normal.map, cfg
 
 
   # Default options.

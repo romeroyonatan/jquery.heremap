@@ -4,8 +4,7 @@
  * Licensed under the GPLv3 license.
  */
 (function($) {
-  var getCenter, getZoom, init, maptypes, options, platform;
-  options = {};
+  var getCenter, getZoom, init, maptypes, platform;
   platform = null;
   maptypes = null;
 
@@ -51,13 +50,10 @@
     options = $.extend({}, $.fn.heremap.options, options);
     init(options);
     return this.each(function() {
-      var cfg;
-      cfg = {
+      return new H.Map(this, maptypes.normal.map, {
         zoom: getZoom(this),
         center: getCenter(this)
-      };
-      console.log(cfg.center);
-      return new H.Map(this, maptypes.normal.map, cfg);
+      });
     });
   };
   return $.fn.heremap.options = {
