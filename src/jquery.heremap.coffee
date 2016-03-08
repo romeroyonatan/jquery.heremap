@@ -11,29 +11,38 @@
   ###
   # Initialize plugin
   ###
-  init = (options)->
+  init = ->
     # check if H exists in the context
     if not H?
       throw new Error "Don't forget include
                       'http://js.api.here.com/v3/3.0/mapsjs-core.js'"
     # initialize platform
     platform = new H.service.Platform
-      app_id: options.app_id
-      app_code: options.app_code
+      app_id: $.fn.heremap.options.app_id
+      app_code: $.fn.heremap.options.app_code
 
     # load map types
     maptypes = platform.createDefaultLayers()
   
-  getCenter = (elem, options) ->
+  getCenter = (elem) ->
     str = $(elem).attr('data-center')
     if str?
-      pattern = /(-?\d+.?\d*),(-?\d+.?\d*)/
-      match = pattern.exec str
-      return {
-        lat: parseFloat match[1]
-        lng: parseFloat match[2]
-      }
-    options.center
+      match = /(-?\d+.?\d*),(-?\d+.?\d*)/.exec str
+      if match?
+        return {
+          lat: parseFloat match[1]
+          lng: parseFloat match[2]
+        }
+    $.fn.heremap.options.center
+
+
+  getZoom = (elem) ->
+    str = $(elem).attr('data-zoom')
+    if str?
+      match = /(\d+)/.exec str
+      if match?
+        return parseInt match[1]
+    $.fn.heremap.options.zoom
 
 
   $.fn.heremap = (options) ->
@@ -42,8 +51,8 @@
     init options
     @.each ->
       cfg =
-        zoom: options.zoom
-        center: getCenter @, options
+        zoom: getZoom @
+        center: getCenter @
       console.log cfg.center
       new H.Map @, maptypes.normal.map, cfg
 

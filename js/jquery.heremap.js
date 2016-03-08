@@ -4,7 +4,7 @@
  * Licensed under the GPLv3 license.
  */
 (function($) {
-  var getCenter, init, maptypes, options, platform;
+  var getCenter, getZoom, init, maptypes, options, platform;
   options = {};
   platform = null;
   maptypes = null;
@@ -12,28 +12,40 @@
   /*
    * Initialize plugin
    */
-  init = function(options) {
+  init = function() {
     if (typeof H === "undefined" || H === null) {
       throw new Error("Don't forget include 'http://js.api.here.com/v3/3.0/mapsjs-core.js'");
     }
     platform = new H.service.Platform({
-      app_id: options.app_id,
-      app_code: options.app_code
+      app_id: $.fn.heremap.options.app_id,
+      app_code: $.fn.heremap.options.app_code
     });
     return maptypes = platform.createDefaultLayers();
   };
-  getCenter = function(elem, options) {
-    var match, pattern, str;
+  getCenter = function(elem) {
+    var match, str;
     str = $(elem).attr('data-center');
     if (str != null) {
-      pattern = /(-?\d+.?\d*),(-?\d+.?\d*)/;
-      match = pattern.exec(str);
-      return {
-        lat: parseFloat(match[1]),
-        lng: parseFloat(match[2])
-      };
+      match = /(-?\d+.?\d*),(-?\d+.?\d*)/.exec(str);
+      if (match != null) {
+        return {
+          lat: parseFloat(match[1]),
+          lng: parseFloat(match[2])
+        };
+      }
     }
-    return options.center;
+    return $.fn.heremap.options.center;
+  };
+  getZoom = function(elem) {
+    var match, str;
+    str = $(elem).attr('data-zoom');
+    if (str != null) {
+      match = /(\d+)/.exec(str);
+      if (match != null) {
+        return parseInt(match[1]);
+      }
+    }
+    return $.fn.heremap.options.zoom;
   };
   $.fn.heremap = function(options) {
     options = $.extend({}, $.fn.heremap.options, options);
@@ -41,8 +53,8 @@
     return this.each(function() {
       var cfg;
       cfg = {
-        zoom: options.zoom,
-        center: getCenter(this, options)
+        zoom: getZoom(this),
+        center: getCenter(this)
       };
       console.log(cfg.center);
       return new H.Map(this, maptypes.normal.map, cfg);
