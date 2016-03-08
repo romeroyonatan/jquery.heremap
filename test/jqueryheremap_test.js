@@ -1,10 +1,10 @@
 (function ($) {
-  module('jQuery.jquery.heremap');
+  module('jQuery.fn.heremap');
 
-  test('is jquery.heremap', function () {
+  test('is heremap', function () {
     expect(2);
-    strictEqual($.jquery.heremap(), 'jquery.heremap.', 'should be jquery.heremap');
-    strictEqual($.jquery.heremap({punctuation: '!'}), 'jquery.heremap!', 'should be thoroughly jquery.heremap');
+    strictEqual($.heremap(), 'heremap', 'should be jquery.heremap');
+    strictEqual($.heremap({punctuation: '!'}), 'jquery.heremap!', 'should be thoroughly jquery.heremap');
   });
   
 }(jQuery));
