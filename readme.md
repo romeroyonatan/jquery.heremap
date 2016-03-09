@@ -12,10 +12,10 @@ For example, you can create a map that shows Berlin
 
 ## Getting Started
 
-Download the [production version][min] or the [development version][max].
+Download the [production version][development] or the [development version][production].
 
-[min]: https://github.com/romeroyonatan/jquery.heremap/raw/master/dist/jquery.heremap.js
-[max]: https://github.com/romeroyonatan/jquery.heremap/raw/master/dist/jquery.heremap.min.js
+[development]: https://github.com/romeroyonatan/jquery.heremap/raw/master/dist/jquery.heremap.js
+[production]: https://github.com/romeroyonatan/jquery.heremap/raw/master/dist/jquery.heremap.min.js
 
 In your web page:
 
