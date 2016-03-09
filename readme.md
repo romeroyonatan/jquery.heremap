@@ -58,19 +58,20 @@ optionals
 
 Attribute|Default|Description|Example
 ---------|-------|-----------|--------
-data-center|0,0|Coordinates which centers the map. If it is not set and you set a marker, the  first marker's coordinates became the center|"-34.6060,-56.7770"
+data-center|0,0|Coordinates which centers the map. If it is not set and you set a marker, the  first marker's coordinates became the center of the map|"-34.6060,-56.7770"
 data-markers|-|Coordinates of markers in the map separated by spaces|"-34.6100,-58.3770 -35,-57"
 data-zoom|10|Zoom level of map|"15"
 data-controls|False|Show controls buttons to users can interact with the map|"true"
 data-interact|False|Let's user interact with the map with their mouse|"true"
 
 ## Options
-  ### $.fn.heremap.options.app_id** (Obligatory)
-    Your App ID. You can get your credentials [here][credentials]
-  ### $.fn.heremap.options.app_code** (Obligatory)
-    Your App Code. You can get your credentials [here][credentials]
-  ### $.fn.heremap.options.lang** (Optional)
-    Your language for localization. You can visit the [localization list][languages]. Default "en-US"
+
+### $.fn.heremap.options.app_id (Obligatory)
+Your App ID. You can get your credentials [here][credentials]
+### $.fn.heremap.options.app_code (Obligatory)
+Your App Code. You can get your credentials [here][credentials]
+### $.fn.heremap.options.lang (Optional)
+Your language for localization. You can visit the [localization list][languages]. Default "en-US"
 
 
 ## TODO
