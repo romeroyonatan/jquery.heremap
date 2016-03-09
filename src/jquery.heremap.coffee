@@ -69,6 +69,9 @@ setMarkers = (map, markers) ->
   if markers?
     for coord in markers
       map.addObject new H.map.Marker coord
+      center = map.getCenter()
+      if center.lat is 0 and center.lng is 0
+        map.setCenter(coord)
 
 
 ###
@@ -102,8 +105,8 @@ $.fn.heremap.options =
   app_code: ''
   zoom: 10
   center:
-    lat: -34.6059
-    lng: -58.3778
+    lat: 0
+    lng: 0
   lang: 'en-US'
 
 # Create maps in document

@@ -1,8 +1,12 @@
 {
-  "name": "jqueryheremap",
+  "name": "jquery.heremap",
   "version": "0.0.1",
   "dependencies": {
-    "jquery": "~2.2.1"
+    "jquery": "~2.2.1",
+    "here-core": "http://js.api.here.com/v3/3.0/mapsjs-core.js",
+    "here-service": "http://js.api.here.com/v3/3.0/mapsjs-service.js",
+    "here-ui": "http://js.api.here.com/v3/3.0/mapsjs-ui.js",
+    "here-ui-css": "http://js.api.here.com/v3/3.0/mapsjs-ui.css"
   },
   "devDependencies": {
   }

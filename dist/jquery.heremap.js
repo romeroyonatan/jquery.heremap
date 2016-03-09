@@ -97,12 +97,18 @@
    */
 
   setMarkers = function(map, markers) {
-    var coord, j, len, results;
+    var center, coord, j, len, results;
     if (markers != null) {
       results = [];
       for (j = 0, len = markers.length; j < len; j++) {
         coord = markers[j];
-        results.push(map.addObject(new H.map.Marker(coord)));
+        map.addObject(new H.map.Marker(coord));
+        center = map.getCenter();
+        if (center.lat === 0 && center.lng === 0) {
+          results.push(map.setCenter(coord));
+        } else {
+          results.push(void 0);
+        }
       }
       return results;
     }
@@ -142,8 +148,8 @@
     app_code: '',
     zoom: 10,
     center: {
-      lat: -34.6059,
-      lng: -58.3778
+      lat: 0,
+      lng: 0
     },
     lang: 'en-US'
   };
