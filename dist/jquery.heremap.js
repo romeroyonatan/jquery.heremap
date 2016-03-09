@@ -162,7 +162,7 @@
   };
 
   $(document).on('ready', function() {
-    return $("div[role='map']").heremap();
+    return $("[data-heremap]").heremap();
   });
 
 }).call(this);

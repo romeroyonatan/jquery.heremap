@@ -23,6 +23,7 @@ init = ->
   # load map types
   maptypes = platform.createDefaultLayers()
 
+
 ###
 # Obtains the center of map by DOM element's attribute "data-center"
 ###
@@ -49,6 +50,7 @@ getZoom = (elem) ->
       return parseInt match[1]
   $.fn.heremap.options.zoom
 
+
 ###
 # Obtains a list of markers by DOM element's attribute "data-markers"
 ###
@@ -61,6 +63,7 @@ getMarkers = (elem) ->
       lng: parseFloat match[3]
 
   markers
+
 
 ###
 # Set markers in the map
@@ -115,6 +118,7 @@ $.fn.heremap.options =
     lng: 0
   lang: 'en-US'
 
+
 # Create maps in document
 $(document).on 'ready', ->
-  $("div[role='map']").heremap()
+  $("[data-heremap]").heremap()

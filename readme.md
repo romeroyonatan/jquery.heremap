@@ -48,7 +48,7 @@ In your web page:
 
 ## Usage
 
-You need a **div** element with atribute **role="map"**. All others atributes are
+You need a container with atribute **data-heremap**. All others atributes are
 optionals
 
 ```html

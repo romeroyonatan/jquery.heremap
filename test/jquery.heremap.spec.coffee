@@ -4,4 +4,4 @@ QUnit.test 'App id should be modificable', (assert) ->
   assert.equal $.fn.heremap.options.app_id, 'something',
 
 QUnit.test 'Heremap plugin should exists', (assert) ->
-  assert.ok $("[role='map']").heremap
+  assert.ok $("[data-heremap]").heremap
