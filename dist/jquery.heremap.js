@@ -120,7 +120,7 @@
    */
 
   createMap = function(elem) {
-    var map, show_controls;
+    var behavior, interact, map, mapEvents, show_controls;
     map = new H.Map(elem, maptypes.normal.map, {
       zoom: getZoom(elem),
       center: getCenter(elem)
@@ -131,7 +131,12 @@
     });
     show_controls = $(elem).attr("data-controls");
     if ((show_controls != null) && show_controls.toLowerCase() === "true") {
-      return H.ui.UI.createDefault(map, maptypes, $.fn.heremap.options.lang);
+      H.ui.UI.createDefault(map, maptypes, $.fn.heremap.options.lang);
+    }
+    interact = $(elem).attr("data-interact");
+    if ((interact != null) && interact.toLowerCase() === "true") {
+      mapEvents = new H.mapevents.MapEvents(map);
+      return behavior = new H.mapevents.Behavior(mapEvents);
     }
   };
 

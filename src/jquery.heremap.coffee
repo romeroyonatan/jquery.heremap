@@ -90,6 +90,11 @@ createMap = (elem) ->
   show_controls = $(elem).attr("data-controls")
   if show_controls? and show_controls.toLowerCase() is "true"
     H.ui.UI.createDefault map, maptypes, $.fn.heremap.options.lang
+  # enable interaction
+  interact = $(elem).attr("data-interact")
+  if interact? and interact.toLowerCase() is "true"
+    mapEvents = new H.mapevents.MapEvents map
+    behavior = new H.mapevents.Behavior mapEvents
 
 
 $.fn.heremap = (options) ->
