@@ -1,7 +1,7 @@
 chai = require 'chai'
 should = chai.should()
 chaiAsPromised = require("chai-as-promised")
-chai.use(chaiAsPromised);
+chai.use(chaiAsPromised)
 
 describe 'jquery.heremap', ->
   describe 'Validating a Here libs imported', ->
