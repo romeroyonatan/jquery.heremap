@@ -1,13 +1,7 @@
-chai = require 'chai'
-should = chai.should()
-chaiAsPromised = require("chai-as-promised")
-chai.use(chaiAsPromised)
 
-describe 'jquery.heremap', ->
-  describe 'Validating a Here libs imported', ->
-    it 'App id should not be null', ->
-      $.fn.heremap.options.app_id = 'something'
-      $.fn.heremap.options.app_id.should.be.equal 'something'
+QUnit.test 'App id should be modificable', (assert) ->
+  $.fn.heremap.options.app_id = 'something'
+  assert.equal $.fn.heremap.options.app_id, 'something',
 
-    it 'Heremap plugin should exists', ->
-      $("[role='map']").heremap.should.be.a 'function'
+QUnit.test 'Heremap plugin should exists', (assert) ->
+  assert.ok $("[role='map']").heremap

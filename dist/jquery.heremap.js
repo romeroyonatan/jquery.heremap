@@ -142,10 +142,12 @@
 
   $.fn.heremap = function(options) {
     options = $.extend({}, $.fn.heremap.options, options);
-    init(options);
-    return this.each(function(i, elem) {
-      return createMap(elem);
-    });
+    if (this.length > 0) {
+      init(options);
+      return this.each(function(i, elem) {
+        return createMap(elem);
+      });
+    }
   };
 
   $.fn.heremap.options = {

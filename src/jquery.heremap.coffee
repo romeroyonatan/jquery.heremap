@@ -100,8 +100,9 @@ createMap = (elem) ->
 $.fn.heremap = (options) ->
   # Override default options with passed-in options.
   options = $.extend({}, $.fn.heremap.options, options)
-  init options
-  @.each (i, elem) -> createMap elem
+  if @.length > 0
+    init options
+    @.each (i, elem) -> createMap elem
 
 
 # Default options.

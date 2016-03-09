@@ -5,6 +5,7 @@ coffeelint = require 'gulp-coffeelint'
 mocha = require 'gulp-mocha'
 uglify = require 'gulp-uglify'
 rename = require 'gulp-rename'
+qunit = require 'node-qunit-phantomjs'
 
 # Coffee script build
 gulp.task 'build', ['coffeelint'], ->
@@ -21,8 +22,7 @@ gulp.task 'coffeelint', ->
       .pipe coffeelint.reporter()
 
 gulp.task 'test', ['build'], ->
-  gulp.src './test/jquery.coffee'
-      .pipe mocha()
+  qunit('./test/qunit.html')
 
 
 # Default task
