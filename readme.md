@@ -12,7 +12,7 @@ For example, you can create a map that shows Berlin
 
 ## Getting Started
 
-Download the [production version][development] or the [development version][production].
+Download the [production version][production] or the [development version][development].
 
 [development]: https://github.com/romeroyonatan/jquery.heremap/raw/master/dist/jquery.heremap.js
 [production]: https://github.com/romeroyonatan/jquery.heremap/raw/master/dist/jquery.heremap.min.js
