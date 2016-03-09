@@ -6,5 +6,5 @@ global.$ = require('jquery')(window)
 global.window = window
 global.document = window.document
 
-require('../js/jquery.heremap')
+require('../dist/jquery.heremap')
 require('./jquery.heremap.spec')

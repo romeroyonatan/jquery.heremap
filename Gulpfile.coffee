@@ -10,10 +10,10 @@ rename = require 'gulp-rename'
 gulp.task 'build', ['coffeelint'], ->
   gulp.src './src/*.coffee'
       .pipe coffee().on('error', gutil.log)
-      .pipe gulp.dest('./js')
+      .pipe gulp.dest('./dist')
       .pipe uglify()
       .pipe rename extname: '.min.js'
-      .pipe gulp.dest('./js')
+      .pipe gulp.dest('./dist')
 
 gulp.task 'coffeelint', ->
   gulp.src './src/*.coffee'
