@@ -114,15 +114,19 @@
    */
 
   createMap = function(elem) {
-    var map;
+    var map, show_controls;
     map = new H.Map(elem, maptypes.normal.map, {
       zoom: getZoom(elem),
       center: getCenter(elem)
     });
     setMarkers(map, getMarkers(elem));
-    return $(elem).data({
+    $(elem).data({
       heremap: map
     });
+    show_controls = $(elem).attr("data-controls");
+    if ((show_controls != null) && show_controls.toLowerCase() === "true") {
+      return H.ui.UI.createDefault(map, maptypes, $.fn.heremap.options.lang);
+    }
   };
 
   $.fn.heremap = function(options) {
@@ -140,7 +144,8 @@
     center: {
       lat: -34.6059,
       lng: -58.3778
-    }
+    },
+    lang: 'en-US'
   };
 
   $(document).on('ready', function() {

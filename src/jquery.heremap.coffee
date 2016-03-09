@@ -59,7 +59,7 @@ getMarkers = (elem) ->
     markers = while match = regex.exec str
       lat: parseFloat match[2]
       lng: parseFloat match[3]
-      
+
   markers
 
 ###
@@ -75,12 +75,19 @@ setMarkers = (map, markers) ->
 # Creates Here Map by using their API
 ###
 createMap = (elem) ->
+  # create map
   map = new H.Map elem, maptypes.normal.map,
     zoom: getZoom elem
     center: getCenter elem
+  # set markers
   setMarkers map, getMarkers elem
+  # asociate map with element's data
   $(elem).data heremap: map
-  
+  # show controls
+  show_controls = $(elem).attr("data-controls")
+  if show_controls? and show_controls.toLowerCase() is "true"
+    H.ui.UI.createDefault map, maptypes, $.fn.heremap.options.lang
+
 
 $.fn.heremap = (options) ->
   # Override default options with passed-in options.
@@ -97,6 +104,7 @@ $.fn.heremap.options =
   center:
     lat: -34.6059
     lng: -58.3778
+  lang: 'en-US'
 
 # Create maps in document
 $(document).on 'ready', ->
