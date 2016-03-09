@@ -1,6 +1,13 @@
-# jquery.heremap
+# jQuery.heremap
 
-> jQuery Plugin to use Here Map API
+> jQuery Plugin to use [Here Map][Here] API
+
+A general purpose library for show maps
+For example, you can create a map that shows Berlin
+
+```html
+  <div role="map" data-center="52.5,13.4"></div>
+```
 
 
 ## Getting Started
@@ -81,5 +88,6 @@ Your language for localization. You can visit the [localization list][languages]
 
 GPLv3 © Yonatan Romero
 
+[Here]: https://maps.here.com/
 [credentials]: https://developer.here.com/javascript-apis/documentation/v3/maps/common/credentials.html
 [languages]: https://developer.here.com/javascript-apis/documentation/v3/maps/topics/map-controls.html
