@@ -3,13 +3,18 @@ coffee = require 'gulp-coffee'
 gutil = require 'gulp-util'
 coffeelint = require 'gulp-coffeelint'
 mocha = require 'gulp-mocha'
-qunit = require 'gulp-qunit'
 uglify = require 'gulp-uglify'
 
 # Coffee script build
 gulp.task 'build', ['coffeelint'], ->
   gulp.src './src/*.coffee'
-      .pipe coffee({bare: true}).on('error', gutil.log)
+      .pipe coffee().on('error', gutil.log)
+      .pipe gulp.dest('./js')
+
+
+gulp.task 'compress', ['build'], ->
+  gulp.src './js/*.js'
+      .pipe uglify()
       .pipe gulp.dest('./js')
 
 
