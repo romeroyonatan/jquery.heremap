@@ -79,3 +79,6 @@ data-interact|False|Let's user interact with the map with their mouse|"true"
 ## License
 
 GPLv3 © Yonatan Romero
+
+[credentials]: https://developer.here.com/javascript-apis/documentation/v3/maps/common/credentials.html
+[languages]: https://developer.here.com/javascript-apis/documentation/v3/maps/topics/map-controls.html
