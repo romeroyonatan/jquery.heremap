@@ -82,7 +82,9 @@ Your language for localization. You can visit the [localization list][languages]
 
 
 ## TODO
-1. End to end tests
+1. Tests
+2. Resize map
+3. Return map instance
 
 ## License
 
