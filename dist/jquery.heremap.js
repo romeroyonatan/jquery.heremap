@@ -1,10 +1,10 @@
-
-/*
- * Copyright (c) 2016 Yonatan Romero
- * Licensed under the GPLv3 license.
- */
-
-(function() {
+/**
+* jQuery.heremap - jQuery plugin to facilitate the use of HereMap API
+* @version v0.0.1
+* @link https://github.com/romeroyonatan/jqueryheremap
+* @author Yonatan Romero - yromero@openmailbox.org
+* @license GPL-3.0
+*/(function() {
   var $, createMap, getCenter, getMarkers, getZoom, init, maptypes, platform,
     slice = [].slice;
 
@@ -137,6 +137,15 @@
       map = $(elem).data('heremap');
       return map != null ? map.getViewPort().resize() : void 0;
     });
+  };
+
+
+  /*
+   * Retrieve map instance
+   */
+
+  $.heremap.fn.map = function() {
+    return $(this).data('heremap');
   };
 
 

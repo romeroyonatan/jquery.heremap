@@ -1,7 +1,6 @@
-###
 # Copyright (c) 2016 Yonatan Romero
 # Licensed under the GPLv3 license.
-###
+# https://github.com/romeroyonatan/jquery.heremap
 $ = window.jQuery or window.Zepto or window.$
 $.heremap = {}
 $.heremap.fn = {}
@@ -85,12 +84,18 @@ $.heremap.fn.addMarker = (position) ->
 ###
 # Resize canvas
 ###
-$.heremap.fn.resize = () ->
+$.heremap.fn.resize = ->
   @each (i, elem) ->
     map = $(elem).data 'heremap'
     map?.getViewPort().resize()
 
-
+#
+###
+# Retrieve map instance
+###
+$.heremap.fn.map = ->
+  return $(@).data 'heremap'
+    
 
 ###
 # Creates Here Map by using their API

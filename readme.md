@@ -110,10 +110,21 @@ $("#somemap").show();
 $("#somemap").heremap("resize");
 ```
 
+
+### .heremap("map")
+**Advanced users only** Retrieves [H.Map][H.Map] object instance.
+
+#### Atributes
+None
+
+#### Example
+```javascript
+map = $("#somemap").heremap("map");
+console.log(map.getCenter());
+```
+
 ## TODO
 1. Tests
-2. Resize map
-3. Return map instance
 
 ## License
 
@@ -122,3 +133,4 @@ GPLv3 © Yonatan Romero
 [Here]: https://maps.here.com/
 [credentials]: https://developer.here.com/javascript-apis/documentation/v3/maps/common/credentials.html
 [languages]: https://developer.here.com/javascript-apis/documentation/v3/maps/topics/map-controls.html
+[H.Map]: https://developer.here.com/javascript-apis/documentation/v3/maps/topics_api_nlp/h-map.html
