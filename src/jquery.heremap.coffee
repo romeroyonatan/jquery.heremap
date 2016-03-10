@@ -3,9 +3,14 @@
 # Licensed under the GPLv3 license.
 ###
 $ = window.jQuery or window.Zepto or window.$
+$.heremap = {}
+$.heremap.fn = {}
+$.fn.heremap = (method="init", args...) ->
+  $.heremap.fn[method].apply(this, args)
 
 platform = null
 maptypes = null
+
 
 ###
 # Initialize plugin
@@ -28,7 +33,7 @@ init = ->
 # Obtains the center of map by DOM element's attribute "data-center"
 ###
 getCenter = (elem) ->
-  str = $(elem).attr('data-center')
+  str = $(elem).data 'center'
   if str?
     match = /(-?\d+.?\d*),(-?\d+.?\d*)/.exec str
     if match?
@@ -43,7 +48,7 @@ getCenter = (elem) ->
 # Obtains the zoom of map by DOM element's attribute "data-zoom"
 ###
 getZoom = (elem) ->
-  str = $(elem).attr('data-zoom')
+  str = $(elem).data 'zoom'
   if str?
     match = /(\d+)/.exec str
     if match?
@@ -55,26 +60,28 @@ getZoom = (elem) ->
 # Obtains a list of markers by DOM element's attribute "data-markers"
 ###
 getMarkers = (elem) ->
-  str = $(elem).attr('data-markers')
+  str = $(elem).data 'markers'
+  markers = []
   if str?
     regex = /((-?\d+.?\d*),(-?\d+.?\d*))+/g
     markers = while match = regex.exec str
       lat: parseFloat match[2]
       lng: parseFloat match[3]
-
   markers
 
 
 ###
-# Set markers in the map
+# Add markers to the map
 ###
-setMarkers = (map, markers) ->
-  if markers?
-    for coord in markers
-      map.addObject new H.map.Marker coord
-      center = map.getCenter()
-      if center.lat is 0 and center.lng is 0
-        map.setCenter(coord)
+$.heremap.fn.addMarker = (position) ->
+  if position?
+    @each (i, elem) ->
+      map = $(elem).data 'heremap'
+      if not map?
+        return
+      map.addObject new H.map.Marker position
+      if map.getCenter().lat is 0 and map.getCenter().lng is 0
+        map.setCenter(position)
 
 
 ###
@@ -85,27 +92,27 @@ createMap = (elem) ->
   map = new H.Map elem, maptypes.normal.map,
     zoom: getZoom elem
     center: getCenter elem
-  # set markers
-  setMarkers map, getMarkers elem
   # asociate map with element's data
   $(elem).data heremap: map
+  # set markers
+  $(elem).heremap 'addMarker', position for position in getMarkers elem
   # show controls
-  show_controls = $(elem).attr("data-controls")
-  if show_controls? and show_controls.toLowerCase() is "true"
+  show_controls = $(elem).data "controls"
+  if show_controls? and show_controls
     H.ui.UI.createDefault map, maptypes, $.fn.heremap.options.lang
   # enable interaction
-  interact = $(elem).attr("data-interact")
-  if interact? and interact.toLowerCase() is "true"
+  interact = $(elem).data "interact"
+  if interact? and interact
     mapEvents = new H.mapevents.MapEvents map
     behavior = new H.mapevents.Behavior mapEvents
 
 
-$.fn.heremap = (options) ->
+$.heremap.fn.init = (options) ->
   # Override default options with passed-in options.
   options = $.extend({}, $.fn.heremap.options, options)
-  if @.length > 0
+  if @length > 0
     init options
-    @.each (i, elem) -> createMap elem
+    @each (i, elem) -> createMap elem
 
 
 # Default options.

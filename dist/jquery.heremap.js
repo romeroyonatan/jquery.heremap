@@ -5,9 +5,23 @@
  */
 
 (function() {
-  var $, createMap, getCenter, getMarkers, getZoom, init, maptypes, platform, setMarkers;
+  var $, createMap, getCenter, getMarkers, getZoom, init, maptypes, platform,
+    slice = [].slice;
 
   $ = window.jQuery || window.Zepto || window.$;
+
+  $.heremap = {};
+
+  $.heremap.fn = {};
+
+  $.fn.heremap = function() {
+    var args, method;
+    method = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
+    if (method == null) {
+      method = "init";
+    }
+    return $.heremap.fn[method].apply(this, args);
+  };
 
   platform = null;
 
@@ -36,7 +50,7 @@
 
   getCenter = function(elem) {
     var match, str;
-    str = $(elem).attr('data-center');
+    str = $(elem).data('center');
     if (str != null) {
       match = /(-?\d+.?\d*),(-?\d+.?\d*)/.exec(str);
       if (match != null) {
@@ -56,7 +70,7 @@
 
   getZoom = function(elem) {
     var match, str;
-    str = $(elem).attr('data-zoom');
+    str = $(elem).data('zoom');
     if (str != null) {
       match = /(\d+)/.exec(str);
       if (match != null) {
@@ -73,7 +87,8 @@
 
   getMarkers = function(elem) {
     var markers, match, regex, str;
-    str = $(elem).attr('data-markers');
+    str = $(elem).data('markers');
+    markers = [];
     if (str != null) {
       regex = /((-?\d+.?\d*),(-?\d+.?\d*))+/g;
       markers = (function() {
@@ -93,24 +108,22 @@
 
 
   /*
-   * Set markers in the map
+   * Add markers to the map
    */
 
-  setMarkers = function(map, markers) {
-    var center, coord, j, len, results;
-    if (markers != null) {
-      results = [];
-      for (j = 0, len = markers.length; j < len; j++) {
-        coord = markers[j];
-        map.addObject(new H.map.Marker(coord));
-        center = map.getCenter();
-        if (center.lat === 0 && center.lng === 0) {
-          results.push(map.setCenter(coord));
-        } else {
-          results.push(void 0);
+  $.heremap.fn.addMarker = function(position) {
+    if (position != null) {
+      return this.each(function(i, elem) {
+        var map;
+        map = $(elem).data('heremap');
+        if (map == null) {
+          return;
         }
-      }
-      return results;
+        map.addObject(new H.map.Marker(position));
+        if (map.getCenter().lat === 0 && map.getCenter().lng === 0) {
+          return map.setCenter(position);
+        }
+      });
     }
   };
 
@@ -120,27 +133,31 @@
    */
 
   createMap = function(elem) {
-    var behavior, interact, map, mapEvents, show_controls;
+    var behavior, interact, j, len, map, mapEvents, position, ref, show_controls;
     map = new H.Map(elem, maptypes.normal.map, {
       zoom: getZoom(elem),
       center: getCenter(elem)
     });
-    setMarkers(map, getMarkers(elem));
     $(elem).data({
       heremap: map
     });
-    show_controls = $(elem).attr("data-controls");
-    if ((show_controls != null) && show_controls.toLowerCase() === "true") {
+    ref = getMarkers(elem);
+    for (j = 0, len = ref.length; j < len; j++) {
+      position = ref[j];
+      $(elem).heremap('addMarker', position);
+    }
+    show_controls = $(elem).data("controls");
+    if ((show_controls != null) && show_controls) {
       H.ui.UI.createDefault(map, maptypes, $.fn.heremap.options.lang);
     }
-    interact = $(elem).attr("data-interact");
-    if ((interact != null) && interact.toLowerCase() === "true") {
+    interact = $(elem).data("interact");
+    if ((interact != null) && interact) {
       mapEvents = new H.mapevents.MapEvents(map);
       return behavior = new H.mapevents.Behavior(mapEvents);
     }
   };
 
-  $.fn.heremap = function(options) {
+  $.heremap.fn.init = function(options) {
     options = $.extend({}, $.fn.heremap.options, options);
     if (this.length > 0) {
       init(options);

@@ -81,6 +81,18 @@ Your App Code. You can get your credentials [here][credentials]
 ### $.fn.heremap.options.lang (Optional)
 Your language for localization. You can visit the [localization list][languages]. Default "en-US"
 
+## API Methods
+### .heremap("addMarker", position)
+Add a marker dynamically into a existing map.
+
+#### Atributes
+* **position** -- Object with *lat* and *lng* attributes which represents latitude and
+longitude respectively
+
+#### Example
+```javascript
+$("#somemap").heremap("addMarker", {lat: -23.6791, lng: -46.6047})
+```
 
 ## TODO
 1. Tests
