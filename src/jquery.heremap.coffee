@@ -77,11 +77,19 @@ $.heremap.fn.addMarker = (position) ->
   if position?
     @each (i, elem) ->
       map = $(elem).data 'heremap'
-      if not map?
-        return
-      map.addObject new H.map.Marker position
-      if map.getCenter().lat is 0 and map.getCenter().lng is 0
-        map.setCenter(position)
+      map?.addObject new H.map.Marker position
+      if map?.getCenter().lat is 0 and map?.getCenter().lng is 0
+        map?.setCenter(position)
+
+
+###
+# Resize canvas
+###
+$.heremap.fn.resize = () ->
+  @each (i, elem) ->
+    map = $(elem).data 'heremap'
+    map?.getViewPort().resize()
+
 
 
 ###

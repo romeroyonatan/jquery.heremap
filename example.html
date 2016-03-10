@@ -43,6 +43,9 @@
 
       $(document).on("ready", function() {
         $("#saopaulo").heremap("addMarker", {lat: -23.6791, lng: -46.6047});
+        $("#saopaulo").attr("style", "width: 800px;");
+        $("#saopaulo").heremap("resize");
+        
       });
     </script>
   </body>

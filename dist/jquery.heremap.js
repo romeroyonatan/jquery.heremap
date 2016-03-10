@@ -116,15 +116,27 @@
       return this.each(function(i, elem) {
         var map;
         map = $(elem).data('heremap');
-        if (map == null) {
-          return;
+        if (map != null) {
+          map.addObject(new H.map.Marker(position));
         }
-        map.addObject(new H.map.Marker(position));
-        if (map.getCenter().lat === 0 && map.getCenter().lng === 0) {
-          return map.setCenter(position);
+        if ((map != null ? map.getCenter().lat : void 0) === 0 && (map != null ? map.getCenter().lng : void 0) === 0) {
+          return map != null ? map.setCenter(position) : void 0;
         }
       });
     }
+  };
+
+
+  /*
+   * Resize canvas
+   */
+
+  $.heremap.fn.resize = function() {
+    return this.each(function(i, elem) {
+      var map;
+      map = $(elem).data('heremap');
+      return map != null ? map.getViewPort().resize() : void 0;
+    });
   };
 
 
