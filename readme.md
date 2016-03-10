@@ -2,11 +2,12 @@
 
 > jQuery Plugin to use [Here Map][Here] API
 
-A general purpose library for show maps
+A general purpose library for show maps. It only works with HTML markup. In the most cases you not need write any Javascript
+
 For example, you can create a map that shows Berlin
 
 ```html
-  <div role="map" data-center="52.5,13.4"></div>
+  <div data-heremap data-center="52.5,13.4"></div>
 ```
 
 
@@ -26,7 +27,7 @@ In your web page:
 </head>
 <body>
   <!-- Berlin Map-->
-  <div role="map" data-center="52.5,13.4"></div>
+  <div data-heremap data-center="52.5,13.4"></div>
 
   <!-- Dependencies -->
   <script src="//js.api.here.com/v3/3.0/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
@@ -52,7 +53,7 @@ You need a container with atribute **data-heremap**. All others atributes are
 optionals
 
 ```html
-<div role="map"
+<div data-heremap
      data-zoom="15"
      data-center="-34.6059,-58.3778"
      data-markers="-34.6059,-58.3778
