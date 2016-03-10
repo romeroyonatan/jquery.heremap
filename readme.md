@@ -1,4 +1,5 @@
 # jQuery.heremap
+![Build Status][travis]
 
 > jQuery Plugin to use [Here Map][Here] API
 
@@ -133,4 +134,4 @@ GPLv3 © Yonatan Romero
 [credentials]: https://developer.here.com/javascript-apis/documentation/v3/maps/common/credentials.html
 [languages]: https://developer.here.com/javascript-apis/documentation/v3/maps/topics/map-controls.html
 [H.Map]: https://developer.here.com/javascript-apis/documentation/v3/maps/topics_api_nlp/h-map.html
-[berlin-png]: .img/.berlin.png
+[travis]: (https://travis-ci.org/romeroyonatan/jquery.heremap.svg?branch=master)](https://travis-ci.org/romeroyonatan/jquery.heremap)berlin-png]: .img/.berlin.png
