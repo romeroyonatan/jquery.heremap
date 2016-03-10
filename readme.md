@@ -10,6 +10,8 @@ For example, you can create a map that shows Berlin
   <div data-heremap data-center="52.5,13.4"></div>
 ```
 
+![Berlin][berlin-png]
+
 
 ## Getting Started
 
@@ -134,3 +136,4 @@ GPLv3 © Yonatan Romero
 [credentials]: https://developer.here.com/javascript-apis/documentation/v3/maps/common/credentials.html
 [languages]: https://developer.here.com/javascript-apis/documentation/v3/maps/topics/map-controls.html
 [H.Map]: https://developer.here.com/javascript-apis/documentation/v3/maps/topics_api_nlp/h-map.html
+[berlin-png]: .img/.berlin.png

@@ -20,14 +20,20 @@ banner = """
 # Coffee script build
 gulp.task 'build', ['coffeelint'], ->
   gulp.src './src/*.coffee'
+      # build coffee script
       .pipe coffee().on('error', gutil.log)
-      .pipe(header(banner, { pkg : pkg } ))
+      # add banner
+      .pipe header banner, pkg : pkg
+      # copy js to dist
       .pipe gulp.dest('./dist')
+      # compress js
       .pipe uglify(preserveComments: 'license')
       .pipe rename extname: '.min.js'
+      # copy minified code to dist folder
       .pipe gulp.dest('./dist')
 
 
+# check if own code has quality
 gulp.task 'coffeelint', ->
   gulp.src './src/*.coffee'
       .pipe coffeelint()
@@ -35,12 +41,13 @@ gulp.task 'coffeelint', ->
 
 
 gulp.task 'test', ['build'], ->
+  # build test code
   gulp.src './test/*.coffee'
       .pipe coffee()
       .pipe rename prefix: '.'
       .pipe gulp.dest('./test')
+  # run qunit
   qunit('./test/qunit.html')
-
  
 
 # Default task
