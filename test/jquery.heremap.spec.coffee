@@ -73,3 +73,18 @@ QUnit.test 'addMarker method', (assert) ->
   position = H.map.Marker.args[0][0]
   assert.propEqual position, {lat:1, lng:1}
   H.map.Marker.restore()
+
+QUnit.test 'resize method', (assert) ->
+  # prepare mock
+  resize = sinon.spy()
+  map =
+    getViewPort: ->
+      resize: resize
+  # create heremap
+  fixture.append "<div data-heremap></div>"
+  $("[data-heremap]").heremap()
+  $("[data-heremap]").data heremap: map
+  # call resize
+  $("[data-heremap]").heremap 'resize'
+  # verify results
+  assert.ok resize.calledOnce
