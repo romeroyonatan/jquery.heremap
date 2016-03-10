@@ -95,6 +95,8 @@ $("#somemap").heremap("addMarker", {lat: -23.6791, lng: -46.6047})
 ```
 
 ### .heremap("resize")
+Resize map canvas.
+
 If you change the size of map container dynamically or if the map is hidden
 when document is loading, after resize or show the map, you need resize the
 canvas with this method
