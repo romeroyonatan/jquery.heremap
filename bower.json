@@ -1,6 +1,5 @@
 {
   "name": "jquery.heremap",
-  "version": "0.0.1",
   "dependencies": {
     "jquery": "~2.2.1",
     "here-core": "https://js.api.here.com/v3/3.0/mapsjs-core.js",
@@ -11,5 +10,23 @@
   },
   "devDependencies": {
     "qunit": "~1.22.0"
-  }
+  },
+  "main": "dist/jquery.heremap.js",
+  "moduleType": [
+    "globals"
+  ],
+  "authors": [
+    "Yonatan Romero <yromero@openmailbox.org>"
+  ],
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "homepage": "https://github.com/romeroyonatan/jquery.heremap",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:romeroyonatan/jquery.heremap.git"
+  },
+  "private": false
 }
