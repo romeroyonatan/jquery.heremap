@@ -14,8 +14,7 @@ QUnit.test 'data-center Markup', (assert) ->
   fixture.append "<div data-heremap data-center='-34,-58'></div>"
   $("[data-heremap]").heremap()
   center = H.Map.args[0][2].center
-  assert.equal center.lat, -34
-  assert.equal center.lng, -58
+  assert.propEqual center, {lat:-34, lng:-58}
   H.Map.restore()
 
 QUnit.test 'data-zoom Markup', (assert) ->
@@ -65,3 +64,12 @@ QUnit.test 'data-interact Markup', (assert) ->
   assert.ok H.mapevents.Behavior.called
   H.mapevents.MapEvents.restore()
   H.mapevents.Behavior.restore()
+
+QUnit.test 'addMarker method', (assert) ->
+  sinon.spy(H.map, "Marker")
+  fixture.append "<div data-heremap></div>"
+  $("[data-heremap]").heremap()
+  $("[data-heremap]").heremap 'addMarker', {lat:1, lng:1}
+  position = H.map.Marker.args[0][0]
+  assert.propEqual position, {lat:1, lng:1}
+  H.map.Marker.restore()
