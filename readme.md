@@ -1,5 +1,5 @@
-# jQuery.heremap
 ![Build Status][travis]
+# jQuery.heremap
 
 > jQuery Plugin to use [Here Map][Here] API
 
