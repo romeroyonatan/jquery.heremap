@@ -62,7 +62,7 @@ getMarkers = (elem) ->
   str = $(elem).data 'markers'
   markers = []
   if str?
-    regex = /((-?\d+.?\d*),(-?\d+.?\d*))+/g
+    regex = /((-?\d+\.?\d*),(-?\d+\.?\d*))+/g
     markers = while match = regex.exec str
       lat: parseFloat match[2]
       lng: parseFloat match[3]

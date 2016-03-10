@@ -90,7 +90,7 @@
     str = $(elem).data('markers');
     markers = [];
     if (str != null) {
-      regex = /((-?\d+.?\d*),(-?\d+.?\d*))+/g;
+      regex = /((-?\d+\.?\d*),(-?\d+\.?\d*))+/g;
       markers = (function() {
         var results;
         results = [];
