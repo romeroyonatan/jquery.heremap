@@ -1,4 +1,4 @@
 /node_modules/
 /bower_components/
 *.sw[po]
-test/jquery.heremap.spec.js
+test/.jquery.heremap.spec.js

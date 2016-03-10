@@ -35,6 +35,10 @@ gulp.task 'coffeelint', ->
 
 
 gulp.task 'test', ['build'], ->
+  gulp.src './test/*.coffee'
+      .pipe coffee()
+      .pipe rename prefix: '.'
+      .pipe gulp.dest('./test')
   qunit('./test/qunit.html')
 
  
