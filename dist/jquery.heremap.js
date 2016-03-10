@@ -2,7 +2,7 @@
 * jQuery.heremap - jQuery plugin to facilitate the use of HereMap API
 * @version v0.0.1
 * @link https://github.com/romeroyonatan/jqueryheremap
-* @author Yonatan Romero - yromero@openmailbox.org
+* @author Yonatan Romero - https://github.com/romeroyonatan
 * @license GPL-3.0
 */(function() {
   var $, createMap, getCenter, getMarkers, getZoom, init, maptypes, platform,
