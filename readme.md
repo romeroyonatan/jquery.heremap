@@ -125,9 +125,6 @@ map = $("#somemap").heremap("map");
 console.log(map.getCenter());
 ```
 
-## TODO
-1. Tests
-
 ## License
 
 GPLv3 © Yonatan Romero
