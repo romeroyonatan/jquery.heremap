@@ -88,3 +88,16 @@ QUnit.test 'resize method', (assert) ->
   $("[data-heremap]").heremap 'resize'
   # verify results
   assert.ok resize.calledOnce
+
+QUnit.test 'map method', (assert) ->
+  # prepare mock
+  map =
+    name: "Mock"
+  # create heremap
+  fixture.append "<div data-heremap></div>"
+  $("[data-heremap]").heremap()
+  $("[data-heremap]").data heremap: map
+  # call map
+  object = $("[data-heremap]").heremap 'map'
+  # verify that map is the same that mock
+  assert.propEqual object, {name: "Mock"}
