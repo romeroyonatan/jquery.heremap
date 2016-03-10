@@ -135,4 +135,4 @@ GPLv3 © Yonatan Romero
 [languages]: https://developer.here.com/javascript-apis/documentation/v3/maps/topics/map-controls.html
 [H.Map]: https://developer.here.com/javascript-apis/documentation/v3/maps/topics_api_nlp/h-map.html
 [berlin-png]: .img/.berlin.png
-[travis]: (https://travis-ci.org/romeroyonatan/jquery.heremap.svg?branch=master)](https://travis-ci.org/romeroyonatan/jquery.heremap)
+[travis]: https://travis-ci.org/romeroyonatan/jquery.heremap.svg?branch=master
