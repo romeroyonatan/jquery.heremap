@@ -6,6 +6,7 @@ uglify = require 'gulp-uglify'
 rename = require 'gulp-rename'
 qunit = require 'node-qunit-phantomjs'
 header = require 'gulp-header'
+concat = require 'gulp-concat'
 
 pkg = require './package.json'
 banner = """
@@ -21,6 +22,7 @@ banner = """
 gulp.task 'build', ['coffeelint'], ->
   gulp.src './src/*.coffee'
       # build coffee script
+      .pipe concat('jquery.heremap.coffee')
       .pipe coffee().on('error', gutil.log)
       # add banner
       .pipe header banner, pkg : pkg

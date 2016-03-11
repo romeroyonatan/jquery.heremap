@@ -5,7 +5,7 @@
 * @author Yonatan Romero - https://github.com/romeroyonatan
 * @license GPL-3.0
 */(function() {
-  var $, createMap, getCenter, getMarkers, getZoom, init, maptypes, platform,
+  var $, MapEditController, createMap, getCenter, getMarkers, getZoom, init, maptypes, platform,
     slice = [].slice;
 
   $ = window.jQuery || window.Zepto || window.$;
@@ -170,7 +170,7 @@
    */
 
   createMap = function(elem) {
-    var behavior, interact, j, len, map, mapEvents, position, ref, show_controls;
+    var behavior, editable, interact, j, len, map, mapEvents, position, ref, show_controls;
     map = new H.Map(elem, maptypes.normal.map, {
       zoom: getZoom(elem),
       center: getCenter(elem)
@@ -187,8 +187,12 @@
     if ((show_controls != null) && show_controls) {
       H.ui.UI.createDefault(map, maptypes, $.fn.heremap.options.lang);
     }
+    editable = $(elem).data("editable");
+    if ((editable != null) && editable) {
+      $.heremap.controller = new MapEditController(elem);
+    }
     interact = $(elem).data("interact");
-    if ((interact != null) && interact) {
+    if (!editable && (interact != null) && interact) {
       mapEvents = new H.mapevents.MapEvents(map);
       return behavior = new H.mapevents.Behavior(mapEvents);
     }
@@ -218,5 +222,67 @@
   $(document).on('ready', function() {
     return $("[data-heremap]").heremap();
   });
+
+  MapEditController = (function() {
+    function MapEditController(elem) {
+      this.elem = elem;
+      this.map = $(this.elem).heremap('map');
+      this.behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
+      this.marker = $(this.elem).heremap('markers')[0];
+      this.addDraggableMarker();
+    }
+
+    MapEditController.prototype.addDraggableMarker = function() {
+      this.map.addEventListener('dragstart', (function(_this) {
+        return function(e) {
+          if (e.target instanceof H.map.Marker) {
+            return _this.behavior.disable();
+          }
+        };
+      })(this));
+      this.map.addEventListener('drag', (function(_this) {
+        return function(e) {
+          var pointer, ref, x, y;
+          pointer = e.currentPointer;
+          if (e.target instanceof H.map.Marker) {
+            ref = [pointer.viewportX, pointer.viewportY], x = ref[0], y = ref[1];
+            return e.target.setPosition(_this.map.screenToGeo(x, y));
+          }
+        };
+      })(this));
+      this.map.addEventListener('dragend', (function(_this) {
+        return function(e) {
+          var position;
+          if (e.target instanceof H.map.Marker) {
+            _this.behavior.enable();
+            position = e.target.getPosition();
+            return $(_this.elem).trigger('heremap.marker.moved', position);
+          }
+        };
+      })(this));
+      return this.map.addEventListener('contextmenu', (function(_this) {
+        return function(e) {
+          var position, ref, x, y;
+          ref = [e.viewportX, e.viewportY], x = ref[0], y = ref[1];
+          position = _this.map.screenToGeo(x, y);
+          _this.setMarkerPosition(position, false);
+          return $(_this.elem).trigger('heremap.marker.moved', position);
+        };
+      })(this));
+    };
+
+    MapEditController.prototype.setMarkerPosition = function(position, center) {
+      if (center == null) {
+        center = true;
+      }
+      if (center) {
+        this.map.setCenter(position);
+      }
+      return this.marker.setPosition(position);
+    };
+
+    return MapEditController;
+
+  })();
 
 }).call(this);

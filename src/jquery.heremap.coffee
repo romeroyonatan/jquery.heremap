@@ -128,9 +128,13 @@ createMap = (elem) ->
   show_controls = $(elem).data "controls"
   if show_controls? and show_controls
     H.ui.UI.createDefault map, maptypes, $.fn.heremap.options.lang
+  # enable editable
+  editable = $(elem).data "editable"
+  if editable? and editable
+    $.heremap.controller = new MapEditController elem
   # enable interaction
   interact = $(elem).data "interact"
-  if interact? and interact
+  if not editable and interact? and interact
     mapEvents = new H.mapevents.MapEvents map
     behavior = new H.mapevents.Behavior mapEvents
 
