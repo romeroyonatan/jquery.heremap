@@ -1,4 +1,4 @@
-![Build Status][travis]
+[![Build Status](https://travis-ci.org/romeroyonatan/jquery.heremap.svg?branch=master)](https://travis-ci.org/romeroyonatan/jquery.heremap)
 # jQuery.heremap
 
 > jQuery Plugin to use [Here Map][Here] API
