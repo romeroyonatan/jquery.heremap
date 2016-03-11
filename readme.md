@@ -153,3 +153,4 @@ GPLv3 © Yonatan Romero
 [H.Map]: https://developer.here.com/javascript-apis/documentation/v3/maps/topics_api_nlp/h-map.html
 [berlin-png]: .img/.berlin.png
 [travis]: https://travis-ci.org/romeroyonatan/jquery.heremap.svg?branch=master
+[H.Marker]: https://developer.here.com/javascript-apis/documentation/v3/maps/topics_api_nlp/h-map-marker.html
