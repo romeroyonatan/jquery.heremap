@@ -138,11 +138,14 @@
    * Set marker position when it is editable
    */
 
-  $.heremap.fn.setMarkerPosition = function(position) {
+  $.heremap.fn.setMarkerPosition = function(position, center) {
     var controller;
-    controller = $(elem).data('heremap.editcontroller');
+    if (center == null) {
+      center = true;
+    }
+    controller = $(this).data('heremap.editcontroller');
     if (controller != null) {
-      return controller.setMarkerPosition(position, false);
+      return controller.setMarkerPosition(position, center);
     }
   };
 
@@ -272,7 +275,7 @@
           if (e.target instanceof H.map.Marker) {
             _this.behavior.enable();
             position = e.target.getPosition();
-            return $(_this.elem).trigger('heremap.marker.moved', position);
+            return _this.setMarkerPosition(position);
           }
         };
       })(this));
@@ -281,8 +284,7 @@
           var position, ref, x, y;
           ref = [e.viewportX, e.viewportY], x = ref[0], y = ref[1];
           position = _this.map.screenToGeo(x, y);
-          _this.setMarkerPosition(position, false);
-          return $(_this.elem).trigger('heremap.marker.moved', position);
+          return _this.setMarkerPosition(position, false);
         };
       })(this));
     };
@@ -294,7 +296,8 @@
       if (center) {
         this.map.setCenter(position);
       }
-      return this.marker.setPosition(position);
+      this.marker.setPosition(position);
+      return $(this.elem).trigger('heremap.marker.moved', position);
     };
 
     return MapEditController;

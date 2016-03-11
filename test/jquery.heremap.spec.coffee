@@ -133,3 +133,15 @@ QUnit.skip 'Edit marker drag', (assert) ->
     assert.equal position.lng, -58
     done()
   H.Map.restore()
+
+QUnit.test 'Set marker position', (assert) ->
+  # create heremap
+  fixture.append "<div data-heremap data-markers='-10,10' data-editable='true'>
+                  </div>"
+  $("[data-heremap]").heremap()
+  $("[data-heremap]").heremap('setMarkerPosition', {lat:50, lng: -50})
+  # call markers
+  markers = $("[data-heremap]").heremap 'markers'
+  # verify that map is the same that mock
+  assert.equal markers.length, 1
+  assert.propEqual markers[0].getPosition(), {lat:50, lng:-50}

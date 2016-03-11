@@ -24,17 +24,16 @@ class MapEditController
       if e.target instanceof H.map.Marker
         @behavior.enable()
         position = e.target.getPosition()
-        # triggers event
-        $(@elem).trigger 'heremap.marker.moved', position
+        @setMarkerPosition position
 
     @map.addEventListener 'contextmenu', (e) =>
       [x, y] = [e.viewportX, e.viewportY]
       position = @map.screenToGeo x, y
       @setMarkerPosition position, false
-      # triggers event
-      $(@elem).trigger 'heremap.marker.moved', position
 
   setMarkerPosition: (position, center=true) ->
     if center
       @map.setCenter position
     @marker.setPosition position
+    # triggers event
+    $(@elem).trigger 'heremap.marker.moved', position

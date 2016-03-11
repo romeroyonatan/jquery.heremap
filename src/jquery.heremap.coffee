@@ -91,10 +91,10 @@ $.heremap.fn.addMarker = (position) ->
 ###
 # Set marker position when it is editable
 ###
-$.heremap.fn.setMarkerPosition = (position) ->
-  controller = $(elem).data 'heremap.editcontroller'
+$.heremap.fn.setMarkerPosition = (position, center=true) ->
+  controller = $(@).data 'heremap.editcontroller'
   if controller?
-    controller.setMarkerPosition position, false
+    controller.setMarkerPosition position, center
 
 
 ###
