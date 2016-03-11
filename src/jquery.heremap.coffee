@@ -88,6 +88,14 @@ $.heremap.fn.addMarker = (position) ->
         if map.getCenter().lat is 0 and map?.getCenter().lng is 0
           map.setCenter(position)
 
+###
+# Set marker position when it is editable
+###
+$.heremap.fn.setMarkerPosition = (position) ->
+  controller = $(elem).data 'heremap.editcontroller'
+  if controller?
+    controller.setMarkerPosition position, false
+
 
 ###
 # Resize canvas
@@ -131,7 +139,7 @@ createMap = (elem) ->
   # enable editable
   editable = $(elem).data "editable"
   if editable? and editable
-    $.heremap.controller = new MapEditController elem
+    $(elem).data "heremap.editcontroller", new MapEditController elem
   # enable interaction
   interact = $(elem).data "interact"
   if not editable and interact? and interact

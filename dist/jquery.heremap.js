@@ -135,6 +135,19 @@
 
 
   /*
+   * Set marker position when it is editable
+   */
+
+  $.heremap.fn.setMarkerPosition = function(position) {
+    var controller;
+    controller = $(elem).data('heremap.editcontroller');
+    if (controller != null) {
+      return controller.setMarkerPosition(position, false);
+    }
+  };
+
+
+  /*
    * Resize canvas
    */
 
@@ -189,7 +202,7 @@
     }
     editable = $(elem).data("editable");
     if ((editable != null) && editable) {
-      $.heremap.controller = new MapEditController(elem);
+      $(elem).data("heremap.editcontroller", new MapEditController(elem));
     }
     interact = $(elem).data("interact");
     if (!editable && (interact != null) && interact) {
