@@ -114,4 +114,22 @@ QUnit.test 'Retrieve markers', (assert) ->
   assert.propEqual markers[1].getPosition(), {lat:20, lng:-20}
 
 QUnit.skip 'Edit marker drag', (assert) ->
-  # XXX how test map's events?
+  # XXX How mock event's dispatch ?
+  done = assert.async()
+  sinon.spy(H, "Map")
+  # create heremap
+  fixture.append "<div data-heremap data-markers='1,1'></div>"
+  $("[data-heremap]").heremap()
+  # get map and marker and change marker's position
+  map = $("[data-heremap]").heremap 'map'
+  marker = $("[data-heremap]").heremap('markers')[0]
+  marker.setPosition {lat: -34, lng: -58}
+  # create and dispatch the event 'dragend'
+  console.log map.dispatchEvent new CustomEvent "dragend",
+     target: marker
+  # verify that event 'heremap.marker.moved' has dispached
+  $("[data-heremap]").on 'heremap.marker.moved', (e, position) ->
+    assert.equal position.lat, -34
+    assert.equal position.lng, -58
+    done()
+  H.Map.restore()
