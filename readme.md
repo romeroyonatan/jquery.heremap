@@ -125,6 +125,23 @@ map = $("#somemap").heremap("map");
 console.log(map.getCenter());
 ```
 
+### .heremap("markers")
+**Advanced users only** Retrieves an array of [H.Marker][H.Marker] added to
+the map.
+
+The list is only informative. If you delete a marker of array, you will not
+cause any effect to the map.
+
+#### Atributes
+None
+
+#### Example
+```javascript
+markers = $("#somemap").heremap("markers");
+console.log(markers)
+```
+
+
 ## License
 
 GPLv3 © Yonatan Romero

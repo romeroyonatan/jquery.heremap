@@ -76,9 +76,17 @@ $.heremap.fn.addMarker = (position) ->
   if position?
     @each (i, elem) ->
       map = $(elem).data 'heremap'
-      map?.addObject new H.map.Marker position
-      if map?.getCenter().lat is 0 and map?.getCenter().lng is 0
-        map?.setCenter(position)
+      if map ?p
+        # initialize markers array
+        if not $(elem).data 'heremap.markers'
+          $(elem).data 'heremap.markers': []
+        # add marker to the map and to the markers array
+        marker = new H.map.Marker position
+        map.addObject marker
+        $(elem).data('heremap.markers').push marker
+        # if map isnt centered, center with marker
+        if map.getCenter().lat is 0 and map?.getCenter().lng is 0
+          map.setCenter(position)
 
 
 ###
@@ -89,12 +97,19 @@ $.heremap.fn.resize = ->
     map = $(elem).data 'heremap'
     map?.getViewPort().resize()
 
-#
+
 ###
 # Retrieve map instance
 ###
 $.heremap.fn.map = ->
   return $(@).data 'heremap'
+    
+
+###
+# Retrieve markers list
+###
+$.heremap.fn.markers = ->
+  return $(@).data 'heremap.markers'
     
 
 ###

@@ -114,13 +114,20 @@
   $.heremap.fn.addMarker = function(position) {
     if (position != null) {
       return this.each(function(i, elem) {
-        var map;
+        var map, marker;
         map = $(elem).data('heremap');
-        if (map != null) {
-          map.addObject(new H.map.Marker(position));
-        }
-        if ((map != null ? map.getCenter().lat : void 0) === 0 && (map != null ? map.getCenter().lng : void 0) === 0) {
-          return map != null ? map.setCenter(position) : void 0;
+        if (map != null ? map : p) {
+          if (!$(elem).data('heremap.markers')) {
+            $(elem).data({
+              'heremap.markers': []
+            });
+          }
+          marker = new H.map.Marker(position);
+          map.addObject(marker);
+          $(elem).data('heremap.markers').push(marker);
+          if (map.getCenter().lat === 0 && (map != null ? map.getCenter().lng : void 0) === 0) {
+            return map.setCenter(position);
+          }
         }
       });
     }
@@ -146,6 +153,15 @@
 
   $.heremap.fn.map = function() {
     return $(this).data('heremap');
+  };
+
+
+  /*
+   * Retrieve markers list
+   */
+
+  $.heremap.fn.markers = function() {
+    return $(this).data('heremap.markers');
   };
 
 
