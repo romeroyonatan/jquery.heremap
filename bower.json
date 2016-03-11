@@ -11,7 +11,7 @@
   "devDependencies": {
     "qunit": "~1.22.0",
     "sinon-qunit": "^2.0.0",
-    "sinonjs": "^1.17.3"
+    "sinonjs": "1.17.1"
   },
   "main": "dist/jquery.heremap.js",
   "moduleType": [
