@@ -104,11 +104,14 @@ QUnit.test 'Retrieve map instance ', (assert) ->
 
 QUnit.test 'Retrieve markers', (assert) ->
   # create heremap
-  fixture.append "<div data-heremap data-markers='1,1 2,2'></div>"
+  fixture.append "<div data-heremap data-markers='-10,10 20,-20'></div>"
   $("[data-heremap]").heremap()
   # call markers
   markers = $("[data-heremap]").heremap 'markers'
   # verify that map is the same that mock
   assert.equal markers.length, 2
-  assert.propEqual markers[0].getPosition(), {lat:1, lng:1}
-  assert.propEqual markers[1].getPosition(), {lat:2, lng:2}
+  assert.propEqual markers[0].getPosition(), {lat:-10, lng:10}
+  assert.propEqual markers[1].getPosition(), {lat:20, lng:-20}
+
+QUnit.skip 'Edit marker drag', (assert) ->
+  # XXX how test map's events?
