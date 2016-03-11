@@ -28,6 +28,10 @@
     <!-- Sao Paulo -->
     <div id="saopaulo" data-heremap data-center="-23.6791,-46.6047"></div>
 
+    <!-- Sao Paulo -->
+    <div id="editable" data-heremap data-markers="-23.6791,-46.6047"
+         data-editable="true"></div>
+
     <script src="https://js.api.here.com/v3/3.0/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://js.api.here.com/v3/3.0/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://js.api.here.com/v3/3.0/mapsjs-ui.js" type="text/javascript" charset="utf-8"></script>
@@ -48,6 +52,9 @@
         var map = $("#saopaulo").heremap("map");
         console.log(map.getCenter());
         
+        $("#editable").on("heremap.marker.moved", function(e, position) {
+          console.log(position);
+        });
       });
     </script>
   </body>

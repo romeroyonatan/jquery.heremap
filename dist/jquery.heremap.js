@@ -228,11 +228,14 @@
       this.elem = elem;
       this.map = $(this.elem).heremap('map');
       this.behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
-      this.marker = $(this.elem).heremap('markers')[0];
+      if ($(this.elem).heremap('markers')) {
+        this.marker = $(this.elem).heremap('markers')[0];
+      }
       this.addDraggableMarker();
     }
 
     MapEditController.prototype.addDraggableMarker = function() {
+      this.marker.draggable = true;
       this.map.addEventListener('dragstart', (function(_this) {
         return function(e) {
           if (e.target instanceof H.map.Marker) {

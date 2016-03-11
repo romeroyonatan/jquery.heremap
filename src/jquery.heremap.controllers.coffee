@@ -4,10 +4,12 @@ class MapEditController
     @elem = elem
     @map = $(@elem).heremap 'map'
     @behavior = new H.mapevents.Behavior new H.mapevents.MapEvents @map
-    @marker = $(@elem).heremap('markers')[0]
+    if $(@elem).heremap('markers')
+      @marker = $(@elem).heremap('markers')[0]
     @addDraggableMarker()
   
   addDraggableMarker: () ->
+    @marker.draggable = on
     @map.addEventListener 'dragstart', (e) =>
       if e.target instanceof H.map.Marker
         @behavior.disable()
