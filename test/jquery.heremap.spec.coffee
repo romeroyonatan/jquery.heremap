@@ -145,3 +145,10 @@ QUnit.test 'Set marker position', (assert) ->
   # verify that map is the same that mock
   assert.equal markers.length, 1
   assert.propEqual markers[0].getPosition(), {lat:50, lng:-50}
+
+QUnit.test 'Multiple init call', (assert) ->
+  fixture.append "<div data-heremap></div>"
+  $("[data-heremap]").heremap()
+  map = $("[data-heremap]").heremap('map')
+  $("[data-heremap]").heremap()
+  assert.equal map,  $("[data-heremap]").heremap('map')

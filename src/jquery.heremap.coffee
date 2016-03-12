@@ -124,6 +124,10 @@ $.heremap.fn.markers = ->
 # Creates Here Map by using their API
 ###
 createMap = (elem) ->
+  # if map exists, dont create a new map
+  if $(elem).data('heremap')
+    return false
+
   # create map
   map = new H.Map elem, maptypes.normal.map,
     zoom: getZoom elem

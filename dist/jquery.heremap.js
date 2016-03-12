@@ -187,6 +187,9 @@
 
   createMap = function(elem) {
     var behavior, editable, interact, j, len, map, mapEvents, position, ref, show_controls;
+    if ($(elem).data('heremap')) {
+      return false;
+    }
     map = new H.Map(elem, maptypes.normal.map, {
       zoom: getZoom(elem),
       center: getCenter(elem)
