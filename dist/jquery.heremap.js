@@ -38,7 +38,8 @@
     }
     platform = new H.service.Platform({
       app_id: $.fn.heremap.options.app_id,
-      app_code: $.fn.heremap.options.app_code
+      app_code: $.fn.heremap.options.app_code,
+      useHTTPS: $.fn.heremap.options.https
     });
     return maptypes = platform.createDefaultLayers();
   };
@@ -235,7 +236,8 @@
       lat: 0,
       lng: 0
     },
-    lang: 'en-US'
+    lang: 'en-US',
+    https: true
   };
 
   $(document).on('ready', function() {
