@@ -25,7 +25,7 @@
     "node_modules",
     "bower_components",
     "test",
-    "example.html"
+    "example/*"
   ],
   "homepage": "https://github.com/romeroyonatan/jquery.heremap",
   "repository": {
