@@ -4,7 +4,7 @@ gutil = require 'gulp-util'
 coffeelint = require 'gulp-coffeelint'
 uglify = require 'gulp-uglify'
 rename = require 'gulp-rename'
-qunit = require 'node-qunit-phantomjs'
+qunit = require 'gulp-qunit'
 header = require 'gulp-header'
 concat = require 'gulp-concat'
 
@@ -49,7 +49,8 @@ gulp.task 'test', ['build'], ->
       .pipe rename prefix: '.'
       .pipe gulp.dest('./test')
   # run qunit
-  qunit('./test/qunit.html')
+  gulp.src './test/qunit.html'
+      .pipe qunit()
  
 
 # Default task
